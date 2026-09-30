@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: nginx-service
+  namespace: foundations
+
+spec:
+  # Azure will provision a load balancer
+  type: LoadBalancer
+
+  selector:
+    # Send traffic to pods with this label
+    app: nginx-web
+
+  ports:
+    - protocol: TCP
+
+      # Client connects to port 80
+      port: 80
+
+      # Service forwards to container port 80
+      targetPort: 80
